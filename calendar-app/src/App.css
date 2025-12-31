@@ -1,0 +1,398 @@
+/* Base */
+body {
+  font-family: system-ui;
+  background: #f1f5f9;
+  margin: 0;
+}
+
+/* Top Bar */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #1e293b;
+  color: white;
+  top: 56px;
+}
+
+.actions button {
+  background: #3b82f6;
+  border: none;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 6px;
+  margin-left: 8px;
+  margin-right:10px;
+  cursor: pointer;
+}
+
+.actions button:hover {
+  filter: brightness(0.95);
+}
+
+/* Month View */
+.month-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin: 20px;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+}
+
+.day-header {
+  padding: 10px 8px;
+  background: #e2e8f0;
+  text-align: center;
+  font-weight: 700;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.month-cell {
+  border-right: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+  height: 110px;
+  padding: 8px;
+  background: white;
+}
+
+.month-cell:nth-child(7n) {
+  border-right: none;
+}
+
+.month-cell.clickable:hover {
+  background: #dbeafe;
+  cursor: pointer;
+}
+
+.date-number {
+  font-size: 12px;
+  color: #334155;
+  font-weight: 700;
+}
+
+.event-dot {
+  width: 100%;
+  height: 6px;
+  border-radius: 4px;
+  margin-top: 6px;
+}
+
+/* Day View (Minute-resolution bars) */
+.day-view {
+  margin: 20px;
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.day-grid {
+  display: flex;
+  position: relative;
+  margin-top: 8px;
+}
+
+/* Left time column */
+.time-column {
+  width: 72px;
+  flex: 0 0 72px;
+}
+
+/* Each hour label row (60px = 60 minutes) */
+.time-label {
+  height: 60px;
+  padding: 6px 6px;
+  font-size: 12px;
+  color: #334155;
+  background: #f1f5f9;
+  border-bottom: 1px solid #e5e7eb;
+  box-sizing: border-box;
+}
+
+/* Right event canvas */
+.events-column {
+  position: relative;
+  flex: 1;
+  border-left: 1px solid #e5e7eb;
+  background: white;
+}
+
+/* Hour separators only (no minute lines shown) */
+.hour-slot {
+  height: 60px;
+  border-bottom: 1px solid #e5e7eb;
+  box-sizing: border-box;
+}
+
+/* Event bar spanning start -> end */
+.event-bar {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  background: #f8fafc;
+  border-radius: 8px;
+  padding: 6px 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  font-size: 12px;
+  cursor: pointer;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.event-bar b {
+  display: block;
+  font-size: 12px;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+.event-type {
+  margin-top: 2px;
+  font-size: 11px;
+  color: #475569;
+}
+
+/* Modal */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 80px;
+  z-index: 2000;
+}
+
+.modal {
+  background: white;
+  width: min(420px, 92vw);
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.modal header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.modal header button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.modal label {
+  display: block;
+  margin-top: 10px;
+  font-size: 12px;
+  color: #334155;
+}
+
+.modal input,
+.modal select {
+  width: 100%;
+  margin-top: 6px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  box-sizing: border-box;
+}
+
+.modal-footer {
+  margin-top: 14px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.modal-footer button {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+button.danger {
+  background: #ef4444;
+  color: white;
+}
+
+button.danger:hover {
+  filter: brightness(0.95);
+}
+
+.error {
+  color: #ef4444;
+  margin: 6px 0 0 0;
+}
+
+/* Context Menu */
+.context-menu {
+  position: absolute;
+  background: white;
+  border: 1px solid #e5e7eb;
+  list-style: none;
+  padding: 6px 0;
+  margin: 0;
+  z-index: 3000;
+  width: 140px;
+  border-radius: 10px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.14);
+}
+
+.context-menu li {
+  padding: 10px 12px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #0f172a;
+}
+
+.context-menu li:hover {
+  background: #f1f5f9;
+}
+
+
+.event-card {
+  padding: 10px;
+  margin-bottom: 10px;
+  background: #f9fafb;
+  border-radius: 6px;
+}
+
+.event-card.completed {
+  opacity: 0.45;
+  filter: blur(1px);
+}
+
+.completed-label {
+  display: inline-block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.event-type {
+  font-size: 12px;
+  color: #475569;
+}
+
+/* Full-screen overlay */
+.right-drawer-overlay {
+  position: fixed;              
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 9999;                
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Sliding panel */
+.right-drawer {
+  width: 360px;
+  height: 100vh;               
+  background: #ffffff;
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  animation: slideFromRight 0.3s ease-out forwards;
+}
+
+/* Header */
+.right-drawer-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Content */
+.right-drawer-content {
+  padding: 16px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+/* Slide animation */
+@keyframes slideFromRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.sticky-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 4000; /* higher than calendar, lower than modals */
+}
+
+
+
+
+/* Day View */
+
+.day-view {
+  height: calc(100vh - 130px);
+  display: flex;
+  flex-direction: column;
+}
+
+/* ONE sticky context */
+.day-view-sticky-stack {
+  position: sticky;
+  top: 61px;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 135px);
+}
+
+/* Header inside stack */
+.day-view-header {
+  background: #e5e7eb;
+  padding: 10px 12px;
+  border-bottom: 1px solid #cbd5e1;
+  z-index: 1;
+}
+
+/* Grid frame */
+.day-grid-sticky {
+  flex: 1;
+  overflow: hidden;
+  background: white;
+}
+
+/* ONE scrollbar */
+.day-grid-scroll {
+  display: flex;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Time column */
+.time-column {
+  width: 72px;
+  flex-shrink: 0;
+  background: #f1f5f9;
+  border-right: 1px solid #e5e7eb;
+}
+
+/* Events column */
+.events-column {
+  position: relative;
+  flex: 1;
+  min-height: 1440px;
+}
